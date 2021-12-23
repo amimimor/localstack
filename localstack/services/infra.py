@@ -181,7 +181,11 @@ def start_proxy_for_service(
     service_name, port, backend_port, update_listener, quiet=False, params={}
 ):
     # TODO: remove special switch for Elasticsearch (see also note in service_port(...) in config.py)
-    if config.FORWARD_EDGE_INMEM and service_name != "elasticsearch":
+    if (
+        config.FORWARD_EDGE_INMEM
+        and service_name != "elasticsearch"
+        and service_name != "opensearch"
+    ):
         if backend_port:
             PROXY_LISTENERS[service_name] = (
                 service_name,
